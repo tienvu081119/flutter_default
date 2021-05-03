@@ -1,7 +1,7 @@
+import 'package:design_ui/base/base_view.dart';
 import 'package:design_ui/src/view_models/news_new_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TabNews extends StatefulWidget {
@@ -19,9 +19,9 @@ class _TabNewsState extends State<TabNews> {
   
     @override
     Widget build(BuildContext context) {
-      return ChangeNotifierProvider<NewsViewModel>(
-          create: (_) => NewsViewModel(),
-          child: Consumer<NewsViewModel>(builder: (_, model, Widget child) {
+      return BaseView<NewsViewModel> (
+          model: NewsViewModel(),
+          builder:(_, model, Widget widget){
             if (model.isLoading) {
               return Center(
                 child: CircularProgressIndicator(),
@@ -45,7 +45,7 @@ class _TabNewsState extends State<TabNews> {
                         subtitle: Text('${model.allNews[index].timeAgo}'),
                       );
                     }));
-          }));
+          });
     }
 
 }
